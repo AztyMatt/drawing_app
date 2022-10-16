@@ -27,20 +27,48 @@ body{
 
 canvas{
     border: 1px solid black;
-}
-
-.erase{
-/*     cursor: url('erase_cursor.png'), auto; */
+    cursor: none;
 }
 
 #commands{
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: end;
+}
+
+#commands div{
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: row;
 }
 
 button{
-    border: 1px solid black;
-    border-top: 0;
+    border: none;
+    border-left: 1px solid black;
     width: 100px;
     height: 50px;
+}
+
+#eraser_cursor{
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 1px solid black;
+    transform: translate(-50%, -50%);
+}
+
+
+#pencil_cursor{
+    display: none;
+    pointer-events: none;
+    position: absolute;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    border: 1px solid black;
+    background-color: black;
+    transform: translate(-50%, -50%);
 }

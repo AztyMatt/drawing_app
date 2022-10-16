@@ -27,13 +27,58 @@ window.addEventListener("load", () => {
         context.moveTo(e.clientX - canvas.getBoundingClientRect().x, e.clientY - canvas.getBoundingClientRect().y);
     }
 
-    // Erase
-    var erase = document.getElementById("erase");
-    erase.addEventListener('click', event => {
-        lineWidth = 20;
-        context.globalCompositeOperation = 'destination-out';
-        canvas.classList.toggle("erase");
+    // Set pencil at start
+    pencil();
+
+    // Set pencil
+    function pencil(){
+        lineWidth = 5;
+        context.globalCompositeOperation = 'source-over';
+
+        canvas.addEventListener ('mouseenter',  event => {
+            if ($("#pencil_cursor").is(":hidden")) {
+                $("#pencil_cursor").toggle();
+            }
+            if ($("#eraser_cursor").is(":visible")) {
+                $("#eraser_cursor").toggle();
+            }
+
+            $(document).mousemove(function(e){
+                $('#pencil_cursor').css({"left" : (e.pageX + 'px'),"top" : (e.pageY   + 'px')});
+            });
+        });
+    };
+    document.getElementById("pencil").addEventListener('click', event => {
+        pencil();
     });
+
+    // Set eraser
+    function eraser(){
+        lineWidth = 30;
+        context.globalCompositeOperation = 'destination-out';
+
+        canvas.addEventListener ('mouseenter',  event => {
+            if ($("#eraser_cursor").is(":hidden")) {
+                $("#eraser_cursor").toggle();
+            }
+            if ($("#pencil_cursor").is(":visible")) {
+                $("#pencil_cursor").toggle();
+            }
+
+            $(document).mousemove(function(e){
+                $('#eraser_cursor').css({"left" : (e.pageX + 'px'),"top" : (e.pageY   + 'px')});
+            });
+        });
+    };
+    document.getElementById("eraser").addEventListener('click', event => {
+        eraser();
+    });
+
+    //Remove all custom_cursor
+    function custom_cursor(){
+        $('#pencil_cursor').css({"display" : 'none'});
+        $('#eraser_cursor').css({"display" : 'none'});
+    }
 
     // Clear
     var clear = document.getElementById("clear");
@@ -46,4 +91,5 @@ window.addEventListener("load", () => {
     canvas.addEventListener('mouseup', finishedPosition);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener ('mouseout', finishedPosition, false);
+    canvas.addEventListener ('mouseout', custom_cursor, false);
 });

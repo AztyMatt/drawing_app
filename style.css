@@ -26,6 +26,8 @@ body{
 }
 
 canvas{
+    background-image: url("medias/background.jpg");
+    background-size: cover;
     border: 1px solid black;
     cursor: none;
 }
@@ -43,6 +45,7 @@ canvas{
 }
 
 button{
+    cursor: pointer;
     border: none;
     border-left: 1px solid black;
     width: 100px;

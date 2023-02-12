@@ -4,7 +4,7 @@ window.addEventListener("load", () => {
     var lineWidth = 5;
     let painting = false;
 
-    // Paint
+    // Draw
     function startPosition(e){
         painting = true;
         draw(e);
@@ -27,7 +27,8 @@ window.addEventListener("load", () => {
         context.moveTo(e.clientX - canvas.getBoundingClientRect().x, e.clientY - canvas.getBoundingClientRect().y);
     }
 
-    // Set pencil at start
+    // Set environnement
+
     pencil();
 
     // Set pencil
@@ -92,4 +93,19 @@ window.addEventListener("load", () => {
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener ('mouseout', finishedPosition, false);
     canvas.addEventListener ('mouseout', custom_cursor, false);
+
+    //Save drawing
+    var download = document.getElementById("download")
+    download.addEventListener("click", function () {
+        if (window.navigator.msSaveBlob){
+            window.navigator.msSaveBlob(canvas.msToBlob(), "drawing_app.png")
+        }else{
+            const a = document.createElement("a");
+            document.body.appendChild(a);
+            a.href = canvas.toDataURL();
+            a.download = "drawing_app.png";
+            a.click();
+            document.body.removeChild(a);
+        }
+    });
 });

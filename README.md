@@ -1,2 +1,1 @@
-# drawing_app
-An application for draw and save your drawings
+# https://mmi21d14.mmi-troyes.fr/drawing_app/
